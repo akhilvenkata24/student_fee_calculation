@@ -1,0 +1,306 @@
+<html>
+<head>
+    <title>CHECK STUDENT STATUS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        a::before {
+            content: "← ";
+            margin-right: 5px;
+        }
+
+        form {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ff;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8f9ff;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input[type="number"]::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a42a0);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        #message {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-line !important;
+            background: white;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        #message:empty {
+            display: none;
+        }
+
+        #message:not(:empty) {
+            animation: slideInRight 0.5s ease-out;
+            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+            color: #333;
+            border-left: 5px solid #667eea;
+        }
+
+        .error-message {
+            background: #f8d7da !important;
+            color: #721c24 !important;
+            border-left: 5px solid #dc3545 !important;
+        }
+
+        form > label:not(:first-of-type) {
+            margin-top: 25px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            form {
+                padding: 30px 25px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+            
+            input[type="number"] {
+                padding: 12px;
+            }
+            
+            button[type="submit"] {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+
+            #message {
+                padding: 20px;
+                margin-top: 25px;
+                font-size: 0.9rem;
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="grad"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23grad)"/><circle cx="80" cy="40" r="1.5" fill="url(%23grad)"/><circle cx="40" cy="70" r="1" fill="url(%23grad)"/><circle cx="90" cy="80" r="1.5" fill="url(%23grad)"/><circle cx="10" cy="60" r="1" fill="url(%23grad)"/></svg>') repeat;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        label[for="tempid"]::before {
+            content: "🆔 ";
+            margin-right: 5px;
+        }
+
+        label[for="studentid"]::before {
+            content: "👤 ";
+            margin-right: 5px;
+        }
+
+        #message {
+            position: relative;
+        }
+
+        #message::before {
+            content: "📊 Status Information";
+            display: block;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #667eea;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #message {
+            text-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html">BACK TO HOME</a>
+    <form id="checkstatus">
+        <h1>CHECK STUDENT STATUS</h1>
+        <label for="tempid">TEMPORARY ID:</label>
+        <input type="number" id="tempid" name="tempid" placeholder="Enter temp ID"><br><br>
+        <label for="studentid">STUDENT ID:</label>
+        <input type="number" id="studentid" name="studentid" placeholder="Enter student ID"><br><br>
+        <button type="submit">CHECK STATUS</button>
+    </form>
+    <p id="message" style="white-space: pre-line;"></p>
+<script>
+document.getElementById("checkstatus").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const tempid = document.getElementById("tempid").value.trim();
+    const studentid = document.getElementById("studentid").value.trim();
+    const message = document.getElementById("message");
+    if (!tempid && !studentid) {
+        message.textContent = "Please enter either Temporary ID or Student ID.";
+        return;
+    }
+    let url = "";
+    if (tempid) {
+        url = `http://localhost:5000/status/${tempid}`;
+    } else {
+        url = `http://localhost:5000/status/student/${studentid}`;
+    }
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error("Student not found");
+            return response.json();
+        })
+        .then(data => {
+            let info = `Status: ${data.status}\nName: ${data.name}\nDepartment: ${data.applied_department}`;
+            if (data.student_id) info += `\nStudent ID: ${data.student_id}`;
+            if (data.final_fee) info += `\nFinal Fee: ₹${data.final_fee}`;
+            if (data.tuition_fee) info += `\nTuition Fee: ₹${data.tuition_fee}`;
+            if (data.lab_fee) info += `\nLab Fee: ₹${data.lab_fee}`;
+            if (data.library_fee) info += `\nLibrary Fee: ₹${data.library_fee}`;
+            if (data.transport_fee) info += `\nTransport Fee: ₹${data.transport_fee}`;
+            if (data.scholarship) info += `\nScholarship: ₹${data.scholarship}`;
+            message.textContent = info;
+        })
+        .catch(error => {
+            message.textContent = error.message;
+        });
+});
+</script>
+</body>
+</html>

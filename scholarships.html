@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Scholarships Management</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: white;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 50px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .home-link {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 12px 20px;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .home-link:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      padding: 40px;
+      min-width: 500px;
+      max-width: 800px;
+      width: 100%;
+      margin-bottom: 30px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    section:last-child {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      color: #333;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      font-weight: 600;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    label {
+      font-weight: 500;
+      color: #333;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      padding: 15px;
+      border: 2px solid #e1e8ff;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: linear-gradient(145deg, #f8f9ff, #e8ecff);
+      text-align: center;
+      width: 100%;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      background: white;
+    }
+
+    button {
+      padding: 15px 30px;
+      background: linear-gradient(145deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    th {
+      background: linear-gradient(145deg, #667eea, #764ba2);
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid #e1e8ff;
+      background: #f8f9ff;
+    }
+
+    tr:hover td {
+      background: #e8ecff;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    #addMessage,
+    #loadMessage {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+      
+      .container {
+        min-width: auto;
+        width: 100%;
+        max-width: 90vw;
+        padding: 30px 20px;
+        margin-bottom: 20px;
+      }
+      
+      .home-link {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 20px;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      th, td {
+        padding: 10px 8px;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="grad"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23grad)"/><circle cx="80" cy="40" r="1.5" fill="url(%23grad)"/><circle cx="40" cy="70" r="1" fill="url(%23grad)"/><circle cx="90" cy="80" r="1.5" fill="url(%23grad)"/><circle cx="10" cy="60" r="1" fill="url(%23grad)"/></svg>') repeat;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="home-link">🏠 HOME</a>
+  <h1>📚 Scholarships Management</h1>
+
+  <div class="container">
+    <section>
+      <h2>Add New Scholarship</h2>
+      <form id="addScholarshipForm">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" rows="3" required></textarea>
+        </div>
+
+        <div>
+          <label for="amount">Amount:</label>
+          <input type="number" id="amount" name="amount" required min="0" step="0.01">
+        </div>
+
+        <div>
+          <label for="eligibility_criteria">Eligibility Criteria:</label>
+          <textarea id="eligibility_criteria" name="eligibility_criteria" rows="2" required></textarea>
+        </div>
+
+        <button type="submit">✨ Add Scholarship</button>
+      </form>
+      <p id="addMessage"></p>
+    </section>
+
+    <section>
+      <h2>Existing Scholarships</h2>
+      <button id="loadScholarshipsBtn">📋 Load Scholarships</button>
+      <table id="scholarshipsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Eligibility Criteria</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="loadMessage"></p>
+    </section>
+  </div>
+
+  <script>
+
+    document.getElementById("loadScholarshipsBtn").addEventListener("click", function() {
+      fetch("http://localhost:5000/scholarships")
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector("#scholarshipsTable tbody");
+          tbody.innerHTML = "";
+          data.forEach(scholarship => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${scholarship.scholarship_id || ''}</td>
+              <td>${scholarship.name || ''}</td>
+              <td>${scholarship.description || ''}</td>
+              <td>₹${scholarship.amount || ''}</td>
+              <td>${scholarship.eligibility_criteria || ''}</td>
+            `;
+            tbody.appendChild(row);
+          });
+          document.getElementById("loadMessage").textContent = `Loaded ${data.length} scholarships.`;
+          document.getElementById("loadMessage").style.color = "green";
+        })
+        .catch(error => {
+          console.error("Error fetching scholarships:", error);
+          document.getElementById("loadMessage").textContent = "Failed to load scholarships.";
+          document.getElementById("loadMessage").style.color = "red";
+        });
+    });
+
+    document.getElementById("addScholarshipForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const data = {
+        name: document.getElementById("name").value,
+        description: document.getElementById("description").value,
+        amount: parseFloat(document.getElementById("amount").value),
+        eligibility_criteria: document.getElementById("eligibility_criteria").value
+      };
+
+      fetch("http://localhost:5000/scholarships", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(async response => {
+        const resData = await response.json();
+        if (response.ok) {
+          document.getElementById("addMessage").style.color = "green";
+          document.getElementById("addMessage").textContent = resData.message || "Scholarship added successfully!";
+
+          this.reset();
+          document.getElementById("loadScholarshipsBtn").click();
+        } else {
+          document.getElementById("addMessage").style.color = "red";
+          document.getElementById("addMessage").textContent = resData.message || "Failed to add scholarship.";
+        }
+      })
+      .catch(error => {
+        console.error("Error adding scholarship:", error);
+        document.getElementById("addMessage").style.color = "red";
+        document.getElementById("addMessage").textContent = "Failed to add scholarship.";
+      });
+    });
+  </script>
+</body>
+</html>

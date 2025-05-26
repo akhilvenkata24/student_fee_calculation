@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fee Payment</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    a::before {
+      content: "← ";
+      margin-right: 5px;
+    }
+
+    form {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    label {
+      display: block;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e1e8ff;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f8f9ff;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus,
+    input[type="tel"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      transform: translateY(-1px);
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23667eea" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 20px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    button[type="submit"]:hover {
+      background: linear-gradient(135deg, #5a6fd8, #6a42a0);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(0);
+    }
+
+    #message {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    #message:not(:empty) {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    #paymentDetails {
+      margin-top: 15px;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      white-space: pre-line;
+    }
+
+    #paymentDetails:empty {
+      display: none;
+    }
+
+    form > label:not(:first-of-type) {
+      margin-top: 25px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+      
+      form {
+        padding: 30px 25px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+      }
+      
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      input[type="tel"],
+      select {
+        padding: 12px;
+      }
+      
+      button[type="submit"] {
+        padding: 15px;
+        font-size: 1.1rem;
+      }
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="grad"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23grad)"/><circle cx="80" cy="40" r="1.5" fill="url(%23grad)"/><circle cx="40" cy="70" r="1" fill="url(%23grad)"/><circle cx="90" cy="80" r="1.5" fill="url(%23grad)"/><circle cx="10" cy="60" r="1" fill="url(%23grad)"/></svg>') repeat;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    .error #message {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    br {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html">BACK TO HOME</a>
+  
+  <form id="feePaymentForm">
+    <h1>Record Fee Payment</h1>
+    
+    <label for="student_id">Student ID (Approved):</label>
+    <input type="number" id="student_id" name="student_id" required>
+    
+    <label for="amount_paid">Amount Paid (₹):</label>
+    <input type="number" id="amount_paid" name="amount_paid" required>
+    
+    <label for="payment_method">Payment Method:</label>
+    <select id="payment_method" name="payment_method" required>
+      <option value="">-- Select --</option>
+      <option value="Cash">Cash</option>
+      <option value="Card">Card</option>
+      <option value="UPI">UPI</option>
+      <option value="Bank Transfer">Bank Transfer</option>
+    </select>
+    
+    <button type="submit">Submit Payment</button>
+  </form>
+  
+  <div style="max-width: 600px; margin: 0 auto;">
+    <p id="message" style="white-space: pre-line; font-weight: bold;"></p>
+    <p id="paymentDetails"></p>
+  </div>
+
+  <script>
+    document.getElementById("feePaymentForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const student_id = document.getElementById("student_id").value;
+      const amount_paid = document.getElementById("amount_paid").value;
+      const payment_method = document.getElementById("payment_method").value;
+      
+      fetch("http://localhost:5000/fee_payments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ student_id, amount_paid, payment_method })
+      })
+      .then(async response => {
+        const data = await response.json();
+        if (response.ok) {
+          document.getElementById("message").textContent = data.message;
+          document.getElementById("paymentDetails").textContent =
+            "Total Paid: ₹" + data.total_paid + "\nBalance Due: ₹" + data.balance_due;
+          alert("Payment Successful!\n\n" + document.getElementById("paymentDetails").textContent);
+        } else {
+          document.getElementById("message").textContent = "Error: " + (data.message || "Unknown error");
+          document.getElementById("paymentDetails").textContent = "";
+          alert("Error: " + (data.message || "Unknown error"));
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("message").textContent = "Failed to submit payment.";
+        document.getElementById("paymentDetails").textContent = "";
+        alert("Failed to submit payment.");
+      });
+    });
+  </script>
+</body>
+</html>
